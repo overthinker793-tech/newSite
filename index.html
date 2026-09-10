@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife — Премиум Фитнес Клубы</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Иконкалар үшін FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER & NAV (2, 3 критерий) -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo" onclick="navigateTo('home')">
+                <i class="fa-solid fa-dumbbell logo-icon"></i> Fit<span>Life</span>
+            </div>
+            <nav class="nav">
+                <a href="#home" onclick="navigateTo('home')">Басты бет</a>
+                <a href="#about" onclick="navigateTo('about')">Біз туралы</a>
+                <a href="#services" onclick="navigateTo('services')">Қызметтер</a>
+                <a href="#catalog" onclick="navigateTo('catalog')">Абонементтер</a>
+                <a href="#contact" onclick="navigateTo('contact')">Байланыс</a>
+            </nav>
+            <div class="header-actions">
+                <!-- 8. Search -->
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Іздеу..." onkeyup="handleSearch()">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SPA ДИНАМИКАЛЫҚ КОНТЕНТ (16, 17 критерий) -->
+    <main id="app-content" class="container main-content">
+        <!-- JS арқылы жүктеледі -->
+    </main>
+
+    <!-- 15. Модальді терезе -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- 11. FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>Fit<span>Life</span></h3>
+                <p>Сіздің денсаулығыңыз бен әдемі дене бітіміңіз — біздің басты мақсатымыз.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Сілтемелер</h4>
+                <ul>
+                    <li><a href="#home" onclick="navigateTo('home')">Басты бет</a></li>
+                    <li><a href="#about" onclick="navigateTo('about')">Біз туралы</a></li>
+                    <li><a href="#catalog" onclick="navigateTo('catalog')">Каталог</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Байланыс</h4>
+                <p><i class="fa-solid fa-phone"></i> +7 (777) 123-45-67</p>
+                <p><i class="fa-solid fa-envelope"></i> info@fitlife.kz</p>
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FitLife Fitness Center. Барлық құқықтар қорғалған.</p>
+        </div>
+    </footer>
+
+    <script src="nikow2.js"></script>
+    <style>
+        :root {
+    --primary: #ff4500;
+    --primary-hover: #e03d00;
+    --dark: #0f172a;
+    --dark-surface: #1e293b;
+    --light-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header & Nav */
+.header {
+    background-color: var(--dark);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+}
+
+.logo span, .logo-icon { color: var(--primary); }
+
+.nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover { color: var(--primary); }
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    background: var(--dark-surface);
+    border: 1px solid #334155;
+    color: #fff;
+    padding: 8px 36px 8px 14px;
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7)), 
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200') center/cover;
+    border-radius: var(--radius);
+    padding: 90px 30px;
+    text-align: center;
+    color: #fff;
+    margin: 25px 0;
+}
+
+.hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
+.hero p { font-size: 18px; color: #cbd5e1; margin-bottom: 24px; }
+
+/* Buttons & Cards */
+.btn-primary {
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+.card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+/* Forms & Validation (9, 10 критерий) */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 600; }
+.form-group input, .form-group textarea {
+    width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;
+}
+.error-msg { color: #ef4444; font-size: 13px; display: none; margin-top: 4px; }
+
+/* Modal & Footer */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: #fff; padding: 30px; border-radius: 10px; max-width: 450px; margin: 12% auto; position: relative; }
+.close-modal { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; }
+
+.footer { background: var(--dark); color: #fff; margin-top: auto; padding-top: 45px; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; padding-bottom: 30px; }
+.footer-bottom { text-align: center; border-top: 1px solid #334155; padding: 18px; color: #94a3b8; font-size: 14px; }
+
+/* Responsive (12 критерий) */
+@media (max-width: 768px) {
+    .header-container { flex-direction: column; gap: 12px; }
+    .hero h1 { font-size: 28px; }
+}
+    </style>
+    <script>
+    // Мәліметтер базасы
+const servicesData = [
+    { title: "Жеке бапкер", desc: "Сертификатталған мамандармен жеке дайындық.", icon: "fa-user-ninja" },
+    { title: "Топтық сабақтар", desc: "Йога, кроссфит, пилатес және зумба.", icon: "fa-users" },
+    { title: "СПА мен Сауна", desc: "Жаттығудан кейінгі толық демалыс аймағы.", icon: "fa-hot-tub-person" },
+    { title: "Диетолог кеңесі", desc: "Жеке тамақтану рационын құру.", icon: "fa-apple-whole" }
+];
+
+const catalogData = [
+    { id: 1, title: "Standard Абонемент", price: "15 000 ₸ / ай", desc: "Тренажер залына шексіз кіру, киім ауыстыру бөлмесі.", img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500" },
+    { id: 2, title: "Unlimited Premium", price: "25 000 ₸ / ай", desc: "Зал + СПА аймағы + Барлық топтық сабақтар.", img: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=500" },
+    { id: 3, title: "Student Pass", price: "10 000 ₸ / ай", desc: "Студенттер үшін арнайы жеңілдетілген тариф.", img: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=500" },
+    { id: 4, title: "Morning Pass", price: "12 000 ₸ / ай", desc: "Таңғы сағат 07:00 - 12:00 аралығында кіру.", img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=500" },
+    { id: 5, title: "VIP Клуб Картасы", price: "45 000 ₸ / ай", desc: "Жеке бапкер + СПА + Жеке шкаф + Бонус сусындар.", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=500" },
+    { id: 6, title: "Family Package", price: "40 000 ₸ / ай", desc: "Отбасылық пакет (2 ересек + 1 бала).", img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=500" }
+];
+
+// SPA Router
+function navigateTo(page, paramId = null) {
+    const app = document.getElementById('app-content');
+    window.location.hash = page + (paramId ? `/${paramId}` : '');
+
+    switch(page) {
+        case 'home': app.innerHTML = renderHome(); break;
+        case 'about': app.innerHTML = renderAbout(); break;
+        case 'services': app.innerHTML = renderServices(); break;
+        case 'catalog': app.innerHTML = renderCatalog(catalogData); break;
+        case 'details': app.innerHTML = renderDetails(paramId); break;
+        case 'contact': app.innerHTML = renderContact(); break;
+        default: app.innerHTML = render404();
+    }
+    window.scrollTo(0, 0);
+}
+
+function renderHome() {
+    return `
+        <section class="hero">
+            <h1>Денеңді өзгерт, өміріңді өзгерт!</h1>
+            <p>FitLife — заманауи құралдар мен кәсіби бапкерлер мекені.</p>
+            <button class="btn-primary" onclick="navigateTo('catalog')">Абонемент Таңдау</button>
+        </section>
+        ${renderServices()}
+        ${renderCatalog(catalogData.slice(0, 3))}
+    `;
+}
+
+function renderAbout() {
+    return `
+        <div style="padding: 40px 0;">
+            <h2 style="font-size:28px; margin-bottom:15px;">FitLife Жобасы Тұралы</h2>
+            <p style="color:var(--text-muted); line-height:1.7;">FitLife — бұл жай ғана тренажер залы емес, бұл салауатты өмір салтын ұстанатын қоғамдастық. 2020 жылы негізі қаланған орталығымыз заманауи фитнес стандарттарына сай қызмет көрсетеді.</p>
+        </div>
+    `;
+}
+
+function renderServices() {
+    return `
+        <h2 style="margin:30px 0 20px;">Біздің Қызметтер</h2>
+        <div class="grid-4">
+            ${servicesData.map(s => `
+                <div class="card" style="text-align:center;">
+                    <i class="fa-solid ${s.icon}" style="font-size:36px; color:var(--primary); margin-bottom:12px;"></i>
+                    <h3 style="margin-bottom:8px;">${s.title}</h3>
+                    <p style="font-size:14px; color:var(--text-muted);">${s.desc}</p>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderCatalog(items) {
+    if(items.length === 0) return `<h3 style="margin:40px 0; text-align:center;">Ақпарат табылмады</h3>`;
+    return `
+        <h2 style="margin:30px 0 20px;">Абонементтер Каталогы</h2>
+        <div class="grid-3">
+            ${items.map(item => `
+                <div class="card">
+                    <img src="${item.img}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p style="color:var(--primary); font-weight:700; margin:8px 0;">${item.price}</p>
+                    <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">${item.desc}</p>
+                    <button class="btn-primary" onclick="navigateTo('details', ${item.id})">Толығырақ</button>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderDetails(id) {
+    const item = catalogData.find(i => i.id == id);
+    if (!item) return render404();
+
+    return `
+        <div style="padding: 30px 0;">
+            <button class="btn-primary" style="margin-bottom:20px;" onclick="navigateTo('catalog')">← Артқа қайту</button>
+            <div style="display:flex; gap:30px; flex-wrap:wrap; background:#fff; padding:30px; border-radius:10px;">
+                <img src="${item.img}" style="max-width:400px; width:100%; border-radius:8px;">
+                <div>
+                    <h2>${item.title}</h2>
+                    <h3 style="color:var(--primary); margin:12px 0;">${item.price}</h3>
+                    <p style="margin-bottom:20px; color:var(--text-muted);">${item.desc}</p>
+                    <button class="btn-primary" onclick="openModal('Тапсырысыңыз қабылданды! Менеджер сізге хабарласады.')">Тапсырыс беру</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderContact() {
+    return `
+        <div style="max-width:500px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; border:1px solid #e2e8f0;">
+            <h2 style="margin-bottom:20px; text-align:center;">Кері Байланыс</h2>
+            <form id="contactForm" onsubmit="validateForm(event)">
+                <div class="form-group">
+                    <label>Аты-жөні:</label>
+                    <input type="text" id="fullname">
+                    <div class="error-msg" id="nameErr">Аты-жөніңізді енгізіңіз</div>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" id="email">
+                    <div class="error-msg" id="emailErr">Дұрыс email енгізіңіз</div>
+                </div>
+                <div class="form-group">
+                    <label>Телефон:</label>
+                    <input type="text" id="phone">
+                    <div class="error-msg" id="phoneErr">Телефон нөмірін енгізіңіз</div>
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%;">Жіберу</button>
+            </form>
+        </div>
+    `;
+}
+
+function render404() {
+    return `
+        <div style="text-align:center; padding:80px 0;">
+            <h1 style="font-size:72px; color:var(--primary);">404</h1>
+            <h2>Бет табылған жоқ</h2>
+            <p style="color:var(--text-muted); margin:12px 0 24px;">Іздеп отырған сілтемеңіз қате немесе жойылған болуы мүмкін.</p>
+            <button class="btn-primary" onclick="navigateTo('home')">Басты бетке оралу</button>
+        </div>
+    `;
+}
+
+// Validation & Search
+function handleSearch() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    if(window.location.hash !== '#catalog') navigateTo('catalog');
+    const res = catalogData.filter(i => i.title.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q));
+    document.getElementById('app-content').innerHTML = renderCatalog(res);
+}
+
+function validateForm(e) {
+    e.preventDefault();
+    let valid = true;
+    const name = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if(!name) { document.getElementById('nameErr').style.display = 'block'; valid = false; }
+    else document.getElementById('nameErr').style.display = 'none';
+
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('emailErr').style.display = 'block'; valid = false; }
+    else document.getElementById('emailErr').style.display = 'none';
+
+    if(!phone) { document.getElementById('phoneErr').style.display = 'block'; valid = false; }
+    else document.getElementById('phoneErr').style.display = 'none';
+
+    if(valid) {
+        openModal('Сұранысыңыз сәтті жіберілді!');
+        document.getElementById('contactForm').reset();
+    }
+}
+
+function openModal(msg) {
+    document.getElementById('modal-body').innerText = msg;
+    document.getElementById('modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+window.onload = () => navigateTo('home');
+</script>
+</body>
+</html>
